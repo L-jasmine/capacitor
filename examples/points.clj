@@ -29,3 +29,17 @@
    [(list "host" "1") ["dc" 3]]                  ;; tags
    [["value" 1.0] ["value_int" 1] ["web" "app"]] ;; fields
    1457624413])                                  ;; timestamp
+
+;;async api
+(def cli (make-client {:db "mynewdb" :username "myuser" :password "mypassword"}))
+(create-db cli)
+
+(write-point
+  (merge c
+    {:async
+      {:ok #(prn "ok" %)
+       :err prn}})
+  ["cpu_load"                                    ;; measurement
+   [(list "host" "1") ["dc" 3]]                  ;; tags
+   [["value" 1.0] ["value_int" 1] ["web" "app"]] ;; fields
+   1457624413])

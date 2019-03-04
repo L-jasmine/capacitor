@@ -92,9 +92,15 @@
   (let [url  (gen-url client action)
         q    (URLEncoder/encode query)
         opts (merge default-get-opts (:get-opts client) {:as :json})]
-    (http-client/get (str url q) opts)))
+    (if-let [async-opt (:async client)]
+      (http-client/get (str url q) (merge opts {:async true})
+        (async-opt :ok) (async-opt :err))
+      (http-client/get (str url q) opts))))
 
 (defn post
   [client action data]
   (let [url (gen-url client action)]
-    (http-client/post url {:body data})))
+    (if-let [async-opt (:async client)]
+      (http-client/post url (merge {:body data} {:async true})
+       (async-opt :ok) (async-opt :err))
+      (http-client/post url {:body data}))))
