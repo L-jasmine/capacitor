@@ -1,4 +1,4 @@
-(defproject capacitor "0.6.0"
+(defproject capacitor "0.6.0-async"
   :description "A Clojure client for InfluxDB"
   :url "https://github.com/L-jasmine/capacitor"
   :license {
@@ -7,7 +7,7 @@
   :dependencies [
     [org.clojure/clojure "1.9.0"]
     [clj-http            "3.9.1"]
-    ;[cheshire            "5.5.0"]
+    [cheshire            "5.5.0"]
     [org.clojure/algo.generic "0.1.2"]]
   :plugins [
     [codox "0.6.6"]]
